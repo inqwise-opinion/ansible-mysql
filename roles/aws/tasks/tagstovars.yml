@@ -1,0 +1,21 @@
+---
+
+- set_fact: 
+    private_dns: '{{ec2_instance.tags["private_dns"]}}'
+  when: ec2_instance.tags["private_dns"] is defined
+
+- set_fact: 
+    private_domain: '{{ ec2_instance.tags["private_domain"] }}'
+  when: ec2_instance.tags["private_domain"] is defined
+
+- set_fact: 
+    data_snapshot: '{{ ec2_instance.tags["data_snapshot"] }}'
+  when: ec2_instance.tags["data_snapshot"] is defined
+
+- set_fact:
+    mysql_yum_repository_url: '{{ ec2_instance.tags["mysql_yum_repository_url"] }}'
+  when: ec2_instance.tags["mysql_yum_repository_url"] is defined
+
+- set_fact:
+    consul_cluster_tag_value: '{{ ec2_instance.tags["consul_cluster_tag_value"] }}'
+  when: ec2_instance.tags["consul_cluster_tag_value"] is defined

@@ -1,0 +1,12 @@
+---
+- name: loop over dns_record_list
+  include_tasks: dnsrecord.yml
+  loop: "{{ dns_record_list }}"
+  loop_control:
+    label: "{{ record.name }}"
+    loop_var: record
+  when:
+    - dns_record_list is defined and (is_full_process or not is_golden_image_process)
+  listen: "aws postactions"
+
+  

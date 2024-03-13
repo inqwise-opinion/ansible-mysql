@@ -1,0 +1,16 @@
+- import_role:
+    name: aws
+
+- include_role:
+    name: mount_disk
+  tags: logic
+
+- include_role:
+    name: mysql
+  vars:
+    mysql:
+      datadir: "{{disk.mount}}/{{disk.data_folder}}"
+      root_password: "{{ root_password }}"
+    ulimit:
+      user: "{{ mysql_user }}"
+  tags: logic
