@@ -6,7 +6,5 @@
     label: "{{ record.name }}"
     loop_var: record
   when:
-    - dns_record_list is defined and (is_full_process or not is_golden_image_process)
+    - dns_record_list is defined
   listen: "aws postactions"
-
-  

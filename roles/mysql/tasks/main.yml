@@ -36,9 +36,9 @@
           - 'mysql-community-server'
         state: present
 
-    - include_tasks: ulimit.yml
-
-  when: is_full_process or is_golden_image_process
+    - import_role:
+        name: os_tune
+        tasks_from: mysql
 
 - name: config
   block:
@@ -46,6 +46,4 @@
  
     - include_tasks: scripts.yml
       when: tmp_root_password.stdout != "" and false
-  when: is_full_process or not is_golden_image_process
-
   
