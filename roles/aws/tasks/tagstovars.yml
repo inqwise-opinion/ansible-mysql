@@ -9,13 +9,17 @@
   when: ec2_instance.tags["private_domain"] is defined
 
 - set_fact: 
-    data_snapshot: '{{ ec2_instance.tags["data_snapshot"] }}'
-  when: ec2_instance.tags["data_snapshot"] is defined
+    discord_message_webhook_id: '{{ec2_instance.tags["discord_message_webhook_id"]}}'
+  when: ec2_instance.tags["discord_message_webhook_id"] is defined
 
-- set_fact:
-    mysql_yum_repository_url: '{{ ec2_instance.tags["mysql_yum_repository_url"] }}'
-  when: ec2_instance.tags["mysql_yum_repository_url"] is defined
+- set_fact: 
+    discord_webhook: '{{ec2_instance.tags["discord_webhook"]}}'
+  when: ec2_instance.tags["discord_webhook"] is defined
 
-- set_fact:
-    consul_cluster_tag_value: '{{ ec2_instance.tags["consul_cluster_tag_value"] }}'
-  when: ec2_instance.tags["consul_cluster_tag_value"] is defined
+- set_fact: 
+    root_password: '{{ec2_instance.tags["root_password"]}}'
+  when: ec2_instance.tags["root_password"] is defined
+
+- set_fact: 
+    discord_message_webhook_token: '{{ec2_instance.tags["discord_message_webhook_token"]}}'
+  when: ec2_instance.tags["discord_message_webhook_token"] is defined
