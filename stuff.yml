@@ -11,10 +11,6 @@
       ttl: 120
 
 - include_role:
-    name: mount_disk
-  tags: logic
-
-- include_role:
     name: mysql
   vars:
     mysql:

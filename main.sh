@@ -1,7 +1,11 @@
 #!/bin/bash
+REGION=$(ec2-metadata --availability-zone | sed -n 's/.*placement: \([a-zA-Z-]*[0-9]\).*/\1/p')
+echo "region:$REGION"
+
 catch_error () {
+    INSTANCE_ID=$(ec2-metadata --instance-id | sed -n 's/.*instance-id: \(i-[a-f0-9]\{17\}\).*/\1/p')
     echo "An error occurred: $1"
-    aws sns publish --topic-arn arn:aws:sns:il-central-1:992382682634:errors --message "$1" --region il-central-1
+    aws sns publish --topic-arn "arn:aws:sns:$REGION:992382682634:errors" --message "$1" --subject "$INSTANCE_ID" --region $REGION
 }
 main () {
     set -euxo pipefail
