@@ -1,5 +1,16 @@
 #!/bin/bash
-REGION=$(ec2-metadata --availability-zone | sed -n 's/.*placement: \([a-zA-Z-]*[0-9]\).*/\1/p')
+while getopts ":e:r:" option
+  do
+   case "${option}"
+   in
+    e) EXTRA=${OPTARG};;
+    r) REGION=${OPTARG};;
+   esac
+done
+if [ -z "$REGION" ]; 
+    then REGION=$(ec2-metadata --availability-zone | sed -n 's/.*placement: \([a-zA-Z-]*[0-9]\).*/\1/p'); 
+fi
+#REGION=$(ec2-metadata --availability-zone | sed -n 's/.*placement: \([a-zA-Z-]*[0-9]\).*/\1/p')
 echo "region:$REGION"
 
 catch_error () {
