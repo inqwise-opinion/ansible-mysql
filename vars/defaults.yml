@@ -1,0 +1,20 @@
+---
+discord_webhook: https://discord.com/api/webhooks/{{ discord_message_webhook_id }}/{{ discord_message_webhook_token }}
+discord_channel: "#notifications"
+#public_dns: mysql
+#private_dns: mysql
+#public_domain: inqwise-stg.com
+private_domain: opinion-stg.local
+mysql_user: "mysql"
+mysql_group: "{{ mysql_user }}"
+disk:
+    name: /dev/sdb
+    mount_options: defaults,noatime
+    mount: /data
+    size: 100 
+    fstype: xfs
+    data_folder: lib
+    user: "{{ mysql_user }}"
+    group: "{{ mysql_group }}"
+    kms_key_id: "{{ disk_kms_key_id }}"
+private_ip: "{{ ansible_default_ipv4['address'] }}"

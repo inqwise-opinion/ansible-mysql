@@ -7,3 +7,4 @@
     label: "process {{ mysql_script }} script"
   vars:
     mysql_script: "{{ item }}"
+  tags: configuration

@@ -1,3 +1,4 @@
 ---
 - name: restart mysql
   service: name='mysqld' state=restarted sleep=5
+  tags: configuration
