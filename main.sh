@@ -20,7 +20,7 @@ catch_error () {
 }
 main () {
     set -euxo pipefail
-    pip install -r requirements.txt --user virtualenv
+    pip install -r requirements.txt --user virtualenv --timeout 60
     export PATH=$PATH:~/.local/bin
     export ANSIBLE_ROLES_PATH="$(pwd)/ansible-galaxy/roles"
     ansible-galaxy install -p roles -r requirements.yml
