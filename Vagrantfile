@@ -20,9 +20,13 @@ AWS_REGION = "il-central-1"
 Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     set -euxo pipefail
-    yum -y erase python3 && amazon-linux-extras install python3.8  
+    cd /vagrant
+    aws s3 cp s3://resource-opinion-stg/get-pip.py - | python3
     echo $PWD
+    export VAULT_PASSWORD=#{`op read "op://Security/ansible-vault inqwise-stg/password"`.strip!}
+    echo "$VAULT_PASSWORD" > secret
     bash main.sh -r #{AWS_REGION}
+    rm secret
   SHELL
 
   config.vm.provider :aws do |aws, override|
