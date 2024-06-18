@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
     override.vm.synced_folder ".", "/vagrant", type: :rsync, rsync__exclude: ['.git/','ansible-galaxy/'], disabled: false
     override.vm.synced_folder '../ansible-galaxy', '/vagrant/ansible-galaxy', type: :rsync, rsync__exclude: '.git/', disabled: false
     
-    aws.region = "il-central-1"
+    aws.region = AWS_REGION
     aws.security_groups = ["sg-0e11a618872a5a387"]
         # public-ssh
     aws.ami = "ami-0bcfb5f8a3f117a50"
@@ -50,5 +50,8 @@ Vagrant.configure("2") do |config|
     aws.subnet_id = "subnet-0f46c97c53ea11e2e"
     aws.associate_public_ip = true
     aws.iam_instance_profile_name = "bootstrap-role"
+    aws.tags = {
+      Name: "mysql-test-#{Etc.getpwuid(Process.uid).name}"
+    }
   end
 end
