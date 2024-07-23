@@ -41,6 +41,7 @@
 - name: update expired root user password
   command: "mysql --user root --password={{ tmp_root_password.stdout }} --connect-expired-password --execute=\"ALTER USER 'root'@'localhost' IDENTIFIED BY '{{ mysql.root_password }}'; UPDATE mysql.user SET Host='%' WHERE Host='localhost' AND User='root';\""
   when: tmp_root_password.stdout != ""
+  no_log: true
   tags: installation
 
 - name: delete /var/log/mysqld.log

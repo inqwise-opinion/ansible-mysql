@@ -5,8 +5,14 @@ discord_channel: "#notifications"
 private_dns: mysql
 #public_domain: inqwise-stg.com
 private_domain: opinion-stg.local
-mysql_user: "mysql"
-mysql_group: "{{ mysql_user }}"
+app_user: "mysql"
+app_group: "{{ app_user }}"
+users_groups:
+  - name: "{{ app_group }}"
+users:
+  - name: "{{ app_user }}"
+    group: "{{ app_group }}"
+    append: yes
 disk:
     name: /dev/sdb
     mount_options: defaults,noatime
@@ -14,7 +20,7 @@ disk:
     size: 100 
     fstype: xfs
     data_folder: lib
-    user: "{{ mysql_user }}"
-    group: "{{ mysql_group }}"
+    user: "{{ app_user }}"
+    group: "{{ app_group }}"
     kms_key_id: "{{ disk_kms_key_id }}"
 private_ip: "{{ ansible_default_ipv4['address'] }}"
