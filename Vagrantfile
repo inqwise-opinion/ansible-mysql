@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     override.vm.synced_folder collection_path, '/vagrant/ansible-galaxy', type: :rsync, rsync__exclude: '.git/', disabled: false      
 
     aws.region = AWS_REGION
-    aws.security_groups = ["sg-0e11a618872a5a387"]
+    aws.security_groups = ["sg-020afd8fd0fa9fd0b"]
         # public-ssh
     aws.ami = "ami-009b671c6592c55db"
     aws.instance_type = "r6g.medium"
