@@ -20,3 +20,4 @@ disk:
     kms_key_id: "{{ disk_kms_key_id }}"
 private_ip: "{{ ansible_default_ipv4.address }}"
 mysql_datadir: "{{disk.mount}}/{{disk.data_folder}}"
+loki_base_url: http://loki.{{ private_domain }}:3100
