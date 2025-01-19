@@ -9,12 +9,15 @@
       type: A
       value: "{{ private_ip }}"
       private: true
-      ttl: 120
+      ttl: 60
     tags_facts:
       private_dns: "private_dns"
       private_domain: "private_domain"
       root_password: "mysql_root_password"
+      disk_snapshot: "disk_snapshot"
+      disk_size: "disk_size"
       datadir: "mysql_datadir"
+      disk_iops: "disk_iops"
 
 - name: Mysql Role
   ansible.builtin.import_role:
