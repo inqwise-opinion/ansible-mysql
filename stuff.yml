@@ -19,6 +19,28 @@
       datadir: "mysql_datadir"
       disk_iops: "disk_iops"
 
+- name: Consul Agent role
+  ansible.builtin.import_role:
+    name: inqwise.common.consul
+  vars:
+    consul_bind_addr: "{{ private_ip }}"
+    consul_retry_join: '["consul.{{ private_domain }}"]'
+    consul_datacenter: "{{ environment_name }}-dc-1"
+    consul_server: false
+    consul_ui: false
+    consul_services:
+    - name: "mysql"
+      tags:
+        - database
+        - mysql
+      port: 3306
+      check:
+        id: mysql-check
+        name: MySQL TCP on port 3306
+        tcp: 127.0.0.1:3306
+        interval: 10s
+        timeout: 1s
+
 - name: Mysql Role
   ansible.builtin.import_role:
     name: inqwise.stacktrek.mysql
